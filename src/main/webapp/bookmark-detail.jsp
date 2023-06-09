@@ -9,7 +9,7 @@
     <link href="${pageContext.request.contextPath}/css/index.css" rel="stylesheet" type="text/css">
 </head>
 <body>
-<h1>와이파이 상세정보</h1>
+<h1>북마크 상세정보</h1>
 <%@ include file="/top.jsp" %>
 <br>
 <table>
