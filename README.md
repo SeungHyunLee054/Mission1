@@ -45,4 +45,4 @@
 ![wifi검색 list 20개](https://github.com/SeungHyunLee054/Mission1/assets/103303970/296fb062-5a02-4d9d-b892-9985b00a15cc)
 
 ### 추가한 기능
-![추가한 기능](https://github.com/SeungHyunLee054/Mission1/assets/103303970/f56fc0b8-4d0e-4c7a-baa9-24452b9fee36)
+![추가한 기능](https://github.com/SeungHyunLee054/Mission1/assets/103303970/5be343be-4293-4f0d-a94a-840f8fd840ce)
