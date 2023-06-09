@@ -39,7 +39,7 @@
 * spring을 썼을 때랑 안 썼을 때의 차이를 느끼고 spring이 정말 간편한 기능이라는 것을 느꼈다.	
 
 ### 초기화면
-![초기화면](https://github.com/SeungHyunLee054/mission1/assets/103303970/ce1042fe-57cb-407e-875f-14c461d0af2e)
+![초기화면](https://github.com/SeungHyunLee054/Mission1/assets/103303970/770ec9d9-4cc4-44d3-ad5c-223977de99a8)
 
 ### wifi검색 list 20개
-![wifi검색 list 20개](https://github.com/SeungHyunLee054/mission1/assets/103303970/07d7a0ac-6a37-4688-8c98-f6b3beffe7fc)
+![wifi검색 list 20개](https://github.com/SeungHyunLee054/Mission1/assets/103303970/296fb062-5a02-4d9d-b892-9985b00a15cc)
