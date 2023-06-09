@@ -27,9 +27,11 @@
             <%=bookMark.getId()%>
         </td>
         <td>
+            <a href="${pageContext.request.contextPath}/bookmark-detail?id=<%=bookMark.getId()%>&distance=${distance}">
             <%=bookMark.getBookmark_group_name()%>
         </td>
         <td>
+            <a href="${pageContext.request.contextPath}/detail?mgrNo=<%=bookMark.getMgr_no()%>&distance=${distance}">
             <%=bookMark.getWifi_name()%>
         </td>
         <td>

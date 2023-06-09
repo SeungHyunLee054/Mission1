@@ -17,7 +17,7 @@
 <table>
     <tr>
         <th>ID</th>
-        <th>북마크 이름</th>
+        <th>북마크 그룹 이름</th>
         <th>순서</th>
         <th>등록일자</th>
         <th>수정일자</th>

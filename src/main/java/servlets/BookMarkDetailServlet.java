@@ -1,5 +1,6 @@
 package servlets;
 
+import dto.BookMark;
 import dto.BookMarkGroup;
 import dto.Wifi;
 
@@ -10,11 +11,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.List;
 
-@WebServlet("/detail")
-public class WifiDetailServlet extends HttpServlet {
+@WebServlet("/bookmark-detail")
+public class BookMarkDetailServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String dbURL = "jdbc:SQLite:C:\\Users\\LSH\\IdeaProjects\\mission1\\src\\main\\webapp\\WEB-INF\\db\\wifi.db";
@@ -25,26 +24,32 @@ public class WifiDetailServlet extends HttpServlet {
             e.printStackTrace();
         }
 
-        String selectWifiSql = "select * " +
-                "from wifi " +
-                "where X_SWIFI_MGR_NO = ?";
-
-        String selectBookMarkGroupSql = "select bookmark_group_name " +
-                "from bookmark_group";
+        String selectBookMarkSql = "select b.id, b.register_date, bg.*, w.* " +
+                "from bookmark b " +
+                "         join wifi w on b.mgr_no = w.X_SWIFI_MGR_NO " +
+                "         join bookmark_group bg on b.bookmark_group_id = bg.id " +
+                "where b.id = ?";
 
         Connection connection = null;
         PreparedStatement pstmt = null;
         ResultSet rs = null;
 
         Wifi wifiData = new Wifi();
-        List<BookMarkGroup> bookMarkGroupList = new ArrayList<>();
-        BookMarkGroup bookMarkGroup;
+        BookMarkGroup bookMarkGroupData =new BookMarkGroup();
+        BookMark bookMarkData =new BookMark();
         try {
             connection = DriverManager.getConnection(dbURL);
-            pstmt = connection.prepareStatement(selectWifiSql);
-            pstmt.setString(1, req.getParameter("mgrNo"));
+            pstmt = connection.prepareStatement(selectBookMarkSql);
+            pstmt.setString(1,req.getParameter("id"));
             rs = pstmt.executeQuery();
 
+            bookMarkData.setId(rs.getInt(1));
+            bookMarkData.setRegister_date(rs.getString("register_date"));
+            bookMarkGroupData.setId(rs.getInt(3));
+            bookMarkGroupData.setBookmark_group_name(rs.getString("bookmark_group_name"));
+            bookMarkGroupData.setOrder(rs.getInt("order"));
+            bookMarkGroupData.setRegister_date(rs.getString(6));
+            bookMarkGroupData.setEdit_date(rs.getString("edit_date"));
             if (req.getParameter("distance").equals("")) {
                 wifiData.setDistance(rs.getDouble("distance"));
             } else {
@@ -66,15 +71,6 @@ public class WifiDetailServlet extends HttpServlet {
             wifiData.setLAT(rs.getDouble("LAT"));
             wifiData.setLNT(rs.getDouble("LNT"));
             wifiData.setWORK_DTTM(rs.getString("WORK_DTTM"));
-
-            pstmt = connection.prepareStatement(selectBookMarkGroupSql);
-            rs = pstmt.executeQuery();
-            while (rs.next()) {
-                bookMarkGroup = new BookMarkGroup();
-                bookMarkGroup.setBookmark_group_name(rs.getString("bookmark_group_name"));
-
-                bookMarkGroupList.add(bookMarkGroup);
-            }
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
@@ -103,8 +99,9 @@ public class WifiDetailServlet extends HttpServlet {
             }
         }
 
-        req.setAttribute("bookMarkGroupList", bookMarkGroupList);
         req.setAttribute("wifiData", wifiData);
-        req.getRequestDispatcher("wifi-detail.jsp").forward(req, resp);
+        req.setAttribute("bookMarkData", bookMarkData);
+        req.setAttribute("bookMarkGroupData", bookMarkGroupData);
+        req.getRequestDispatcher("bookmark-detail.jsp").forward(req, resp);
     }
 }

@@ -6,7 +6,7 @@
 <body>
 <script>
     alert("북마크 정보를 추가하였습니다.");
-    location.href="${pageContext.request.contextPath}/bookmark-list";
+    location.href="${pageContext.request.contextPath}/bookmark-list?distance="+${distance};
 </script>
 </body>
 </html>

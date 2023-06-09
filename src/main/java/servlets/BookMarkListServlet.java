@@ -44,6 +44,8 @@ public class BookMarkListServlet extends HttpServlet {
                 bookMark.setBookmark_group_name(rs.getString("bookmark_group_name"));
                 bookMark.setWifi_name(rs.getString("wifi_name"));
                 bookMark.setRegister_date(rs.getString("register_date"));
+                bookMark.setBookmark_group_id(rs.getInt("bookmark_group_id"));
+                bookMark.setMgr_no(rs.getString("mgr_no"));
 
                 bookMarkList.add(bookMark);
             }
@@ -75,6 +77,7 @@ public class BookMarkListServlet extends HttpServlet {
             }
         }
 
+        req.setAttribute("distance",req.getParameter("distance"));
         req.setAttribute("bookMarkList", bookMarkList);
         req.getRequestDispatcher("bookmark-list.jsp").forward(req, resp);
     }

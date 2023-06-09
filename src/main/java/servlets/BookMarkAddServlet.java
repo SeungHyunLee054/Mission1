@@ -24,8 +24,8 @@ public class BookMarkAddServlet extends HttpServlet {
         }
 
         String insertSql = "insert into bookmark " +
-                "    (bookmark_group_name, wifi_name, register_date) " +
-                "select ?, X_SWIFI_MAIN_NM, datetime('now') " +
+                "    (bookmark_group_name, wifi_name, register_date, bookmark_group_id, mgr_no) " +
+                "select ?, X_SWIFI_MAIN_NM, datetime('now'), (select id from bookmark_group where bookmark_group_name = ?), ? " +
                 "from wifi " +
                 "where X_SWIFI_MGR_NO = ?";
 
@@ -36,7 +36,9 @@ public class BookMarkAddServlet extends HttpServlet {
             connection = DriverManager.getConnection(dbURL);
             pstmt = connection.prepareStatement(insertSql);
             pstmt.setString(1, req.getParameter("bookmarkGroupName"));
-            pstmt.setString(2, req.getParameter("mgrNo"));
+            pstmt.setString(2, req.getParameter("bookmarkGroupName"));
+            pstmt.setString(3, req.getParameter("mgrNo"));
+            pstmt.setString(4, req.getParameter("mgrNo"));
             pstmt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -58,6 +60,7 @@ public class BookMarkAddServlet extends HttpServlet {
             }
         }
 
+        req.setAttribute("distance",req.getParameter("distance"));
         req.getRequestDispatcher("bookmark-add-submit.jsp").forward(req, resp);
     }
 }

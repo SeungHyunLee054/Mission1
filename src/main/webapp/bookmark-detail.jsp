@@ -1,6 +1,6 @@
 <%@ page import="dto.Wifi" %>
-<%@ page import="java.util.List" %>
 <%@ page import="dto.BookMarkGroup" %>
+<%@ page import="dto.BookMark" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!doctype html>
 <html>
@@ -9,27 +9,48 @@
     <link href="${pageContext.request.contextPath}/css/index.css" rel="stylesheet" type="text/css">
 </head>
 <body>
-<h1>와이파이 정보 구하기</h1>
+<h1>와이파이 상세정보</h1>
 <%@ include file="/top.jsp" %>
 <br>
-<% Wifi wifi = (Wifi) request.getAttribute("wifiData");%>
-<% List<BookMarkGroup> bookMarkGroupList = (List<BookMarkGroup>) request.getAttribute("bookMarkGroupList");%>
-<form action="${pageContext.request.contextPath}/bookmark-add" method="get">
-    <input type="hidden" name="mgrNo" value="<%=request.getParameter("mgrNo")%>">
-    <input type="hidden" name="distance" value="<%=String.format("%.4f", wifi.getDistance())%>">
-    <select name="bookmarkGroupName">
-        <option value="none">북마크 그룹 이름 선택</option>
-        <% if (bookMarkGroupList != null && !bookMarkGroupList.isEmpty()) {%>
-        <% for (BookMarkGroup bookMarkGroup : bookMarkGroupList) {%>
-        <option value="<%=bookMarkGroup.getBookmark_group_name()%>">
-            <%=bookMarkGroup.getBookmark_group_name()%>
-        </option>
-        <% } %>
-        <% } %>
-    </select>
-    <input type="submit" value="북마크 추가하기">
-</form>
 <table>
+    <% Wifi wifi = (Wifi) request.getAttribute("wifiData");%>
+    <% BookMarkGroup bookMarkGroup = (BookMarkGroup) request.getAttribute("bookMarkGroupData");%>
+    <% BookMark bookMark = (BookMark) request.getAttribute("bookMarkData");%>
+    <tr>
+        <th>북마크 id</th>
+        <td><%=bookMark.getId()%>
+        </td>
+    </tr>
+    <tr>
+        <th>북마크 등록일자</th>
+        <td><%=bookMark.getRegister_date()%>
+        </td>
+    </tr>
+    <tr>
+        <th>북마크 그룹 id</th>
+        <td><%=bookMarkGroup.getId()%>
+        </td>
+    </tr>
+    <tr>
+        <th>북마크 그룹 이름</th>
+        <td><%=bookMarkGroup.getBookmark_group_name()%>
+        </td>
+    </tr>
+    <tr>
+        <th>북마크 그룹 순서</th>
+        <td><%=bookMarkGroup.getOrder()%>
+        </td>
+    </tr>
+    <tr>
+        <th>북마크 그룹 등록일자</th>
+        <td><%=bookMarkGroup.getRegister_date()%>
+        </td>
+    </tr>
+    <tr>
+        <th>북마크 그룹 수정일자</th>
+        <td><%=bookMarkGroup.getEdit_date() != null ? bookMarkGroup.getEdit_date() : ""%>
+        </td>
+    </tr>
     <tr>
         <th>거리(Km)</th>
         <td><%=String.format("%.4f", wifi.getDistance())%>

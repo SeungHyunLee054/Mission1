@@ -23,16 +23,24 @@ public class BookMarkGroupDeleteServlet extends HttpServlet {
             e.printStackTrace();
         }
 
-        String deleteSql = "delete " +
+        String deleteBookMarkGroupSql = "delete " +
                 "from bookmark_group " +
                 "where id = ?";
+
+        String deleteBookMarkSql = "delete " +
+                "from bookmark " +
+                "where bookmark_group_id = ?";
 
         Connection connection = null;
         PreparedStatement pstmt = null;
 
         try {
             connection = DriverManager.getConnection(dbURL);
-            pstmt = connection.prepareStatement(deleteSql);
+            pstmt = connection.prepareStatement(deleteBookMarkGroupSql);
+            pstmt.setInt(1, Integer.parseInt(req.getParameter("id")));
+            pstmt.executeUpdate();
+
+            pstmt = connection.prepareStatement(deleteBookMarkSql);
             pstmt.setInt(1, Integer.parseInt(req.getParameter("id")));
             pstmt.executeUpdate();
         } catch (SQLException e) {
