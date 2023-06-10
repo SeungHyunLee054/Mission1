@@ -6,7 +6,7 @@
 <head>
     <title>와이파이 정보 구하기</title>
     <link href="${pageContext.request.contextPath}/css/index.css" rel="stylesheet" type="text/css">
-    <script src="${pageContext.request.contextPath}/js/delete-history.js"></script>
+    <script src="js/submit.js"></script>
 </head>
 <body>
     <h1>위치 히스토리 목록</h1>

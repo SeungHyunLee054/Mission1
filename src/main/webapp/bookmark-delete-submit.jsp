@@ -2,11 +2,11 @@
 <html>
 <head>
     <title>와이파이 정보 구하기</title>
+    <script src="js/submit.js"></script>
 </head>
 <body>
 <script>
-    alert("북마크 정보를 삭제하였습니다.");
-    location.href="${pageContext.request.contextPath}/bookmark-list";
+    bookMarkDeleteSubmit();
 </script>
 </body>
 </html>
